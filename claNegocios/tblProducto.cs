@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,19 @@ namespace claNegocios
             }
 
             
+        }
+
+        public DataSet cargarProducto()
+        {
+            string query = "SELECT * FROM tblProducto";
+            SqlCommand cmd = new SqlCommand (query, con.con);
+            con.abrir();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataSet dt = new DataSet();
+            sda.Fill(dt);
+            con.cerrar();
+            return dt;
+                
         }
 
 
