@@ -70,6 +70,7 @@
     <Content Include="frmAgregar.aspx" />
     <Content Include="frmInicio.aspx" />
     <Content Include="frmLogin.aspx" />
+    <Content Include="frmMain.aspx" />
     <Content Include="resources\svgbg.svg" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -95,10 +96,25 @@
     <Compile Include="frmLogin.aspx.designer.cs">
       <DependentUpon>frmLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="frmMain.aspx.cs">
+      <DependentUpon>frmMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmMain.aspx.designer.cs">
+      <DependentUpon>frmMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="plantilla.Master.cs">
+      <DependentUpon>plantilla.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="plantilla.Master.designer.cs">
+      <DependentUpon>plantilla.Master</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="plantilla.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
