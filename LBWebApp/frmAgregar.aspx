@@ -18,7 +18,8 @@
             <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
             <asp:Label ID="lblMarca" runat="server" Text="Marca"></asp:Label>
             <asp:TextBox ID="txtMarca" runat="server"></asp:TextBox>
-            <asp:Button ID="btnEnviar" runat="server" Text="Button" />
+            <asp:Button ID="btnEnviar" runat="server" Text="Enviar" OnClick="btnEnviar_Click" />
+            <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
         </div>
     </form>
 </body>
