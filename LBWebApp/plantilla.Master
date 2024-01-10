@@ -13,7 +13,20 @@
         .navigation{
             margin:5px;
         }
-       
+       body{
+           background-color:#121414;
+           color:white;
+       }
+
+       .form-control{
+           background-color:#121414 !important;
+           color: white!important   ;
+       }
+
+       .table{
+           color: white!important;
+       }
+
     </style>
 </head>
 <body>
