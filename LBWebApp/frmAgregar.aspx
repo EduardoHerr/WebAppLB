@@ -12,6 +12,8 @@
 
 
     <div class="contenedor">
+        <h1> <asp:Label ID="lblAviso" runat="server" Text=""></asp:Label></h1>
+        <asp:LinkButton ID="lnkInsertar" OnClick="lnkInsertar_Click" runat="server">Volver a Insertar un Producto</asp:LinkButton>
         <div class="row">
             <div class="col">
                 <div class="row">
@@ -83,7 +85,7 @@
                         <asp:TemplateField HeaderText="Acciones">
                             <ItemTemplate>
                                 
-                                <asp:LinkButton ID="lnkEditar" CommandName="Editar" CssClass="btn btn-warning"  runat="server">Editar</asp:LinkButton>
+                                <asp:LinkButton ID="lnkEditar" CommandName="Editar" CommandArgument='<%#Eval("idProducto")%>' CssClass="btn btn-warning"  runat="server">Editar</asp:LinkButton>
                                 <asp:LinkButton ID="lnkEliminar" CssClass="btn btn-danger" runat="server">Eliminar</asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>

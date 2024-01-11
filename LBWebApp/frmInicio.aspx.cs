@@ -39,5 +39,10 @@ namespace LBWebApp
                 lblInicio.Text = "Buenas Noches " + nombre;
             }
         }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/frmAgregar.aspx");
+        }
     }
 }

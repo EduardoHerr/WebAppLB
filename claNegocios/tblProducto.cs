@@ -65,6 +65,15 @@ namespace claNegocios
                 
         }
 
+        public SqlDataReader cargarProductoxID(int key)
+        {
+            string query = "SELECT * FROM tblProducto WHERE idProducto="+key;
+            SqlCommand cmd = new SqlCommand(query, con.con);
+            con.abrir();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            
+            return sdr;
+        }
 
     }
 }

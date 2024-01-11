@@ -11,6 +11,7 @@
     <form id="form1" runat="server">
         <div>
             <asp:Label ID="lblInicio" runat="server" Text=""></asp:Label>
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Inventario</asp:LinkButton>
         </div>
     </form>
 </body>

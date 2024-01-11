@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Web;
@@ -13,12 +14,19 @@ namespace LBWebApp
     public partial class WebForm1 : System.Web.UI.Page
     {
         tblProducto prod = new  tblProducto();  
+        static bool editar = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 cargarGrid();
+
+
             }
+
+            lblAviso.Text = "Insercion de Productos";
+            lnkInsertar.Visible = false;
+
         }
 
         void limpiar()
@@ -37,16 +45,24 @@ namespace LBWebApp
 
         private  void llenarTxt(int key)
         {
-            txtNombre.Text = gdata1.Rows[key].Cells[0].ToString();
-            txtCodigo.Text = gdata1.Rows[key].Cells[1].ToString();
-            txtDescripcion.Text = gdata1.Rows[key].Cells[2].ToString();
-            txtMarca.Text = gdata1.Rows[key].Cells[3].ToString();
+
+            SqlDataReader dat = prod.cargarProductoxID(key);
+            if (dat.Read())
+            {
+                txtNombre.Text = dat["prodNombre"].ToString();
+                txtCodigo.Text = dat["prodCodigo"].ToString();
+                txtDescripcion.Text = dat["prodDescripcion"].ToString();
+                txtMarca.Text = dat["prodMarca"].ToString();
+
+            }
+
+            
         }
 
 
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
-             
+            
             
             if (string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtCodigo.Text) || string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(txtMarca.Text))
             {
@@ -57,17 +73,36 @@ namespace LBWebApp
             }
             else
             {
-                if (prod.insertarProductos(txtNombre.Text.Trim(), txtCodigo.Text.Trim(), txtDescripcion.Text.Trim(), txtMarca.Text.Trim()))
+                if (editar)
                 {
-                    lblMensaje.ForeColor = Color.Green;
-                    lblMensaje.Text = "Datos Guardados";
-                    
+
                 }
                 else
                 {
-                    lblMensaje.ForeColor= Color.Red;
-                    lblMensaje.Text = "Datos NO Guardados";
+                    if (prod.insertarProductos(txtNombre.Text.Trim(), txtCodigo.Text.Trim(), txtDescripcion.Text.Trim(), txtMarca.Text.Trim()))
+                    {
+                        lblMensaje.ForeColor = Color.Green;
+                        lblMensaje.Text = "Datos Guardados";
+
+                    }
+                    else
+                    {
+                        lblMensaje.ForeColor = Color.Red;
+                        lblMensaje.Text = "Datos NO Guardados";
+                    }
                 }
+
+                if (!editar)
+                {
+                    lblAviso.Text = "Insercion de Productos";
+                    lnkInsertar.Visible = false;
+                }
+                else
+                {
+                    lblAviso.Text = "Edicion de Productos";
+                    lnkInsertar.Visible = true;
+                }
+
             }
            
             limpiar();
@@ -79,9 +114,17 @@ namespace LBWebApp
         {
             if (e.CommandName=="Editar")
             {
-                int fila = ((GridViewRow)((LinkButton)e.CommandSource).Parent.Parent).RowIndex;
+                int fila = Convert.ToInt16( e.CommandArgument);
                 llenarTxt(fila);
+                editar = true;
+                Response.Redirect("~/frmAgregar.aspx");
             }
+        }
+
+        protected void lnkInsertar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/frmAgregar.aspx");
+            editar = false;
         }
     }
 }
